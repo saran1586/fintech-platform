@@ -1,0 +1,27 @@
+server:
+  http:
+    addr: 0.0.0.0:8003
+    timeout: 1s
+
+  grpc:
+    addr: 0.0.0.0:9003
+    timeout: 1s
+
+data:
+  database:
+    driver: postgres
+    source: "host=localhost user=postgres password=postgres dbname=postgres port=5432 sslmode=disable"
+
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+
+  account:
+    endpoint: 127.0.0.1:9007
+
+  transaction_client:
+    endpoint: localhost:9004
+
+nats:
+  addr: nats://localhost:4222

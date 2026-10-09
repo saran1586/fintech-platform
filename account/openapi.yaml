@@ -1,0 +1,235 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: AccountService API
+    version: 0.0.1
+paths:
+    /v1/accounts:
+        get:
+            tags:
+                - AccountService
+            operationId: AccountService_GetAccounts
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.GetAccountsReply'
+        post:
+            tags:
+                - AccountService
+            operationId: AccountService_CreateAccount
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/account.v1.CreateAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.CreateAccountReply'
+    /v1/accounts/{accountId}:
+        get:
+            tags:
+                - AccountService
+            operationId: AccountService_GetAccount
+            parameters:
+                - name: accountId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.GetAccountReply'
+        delete:
+            tags:
+                - AccountService
+            operationId: AccountService_DeleteAccount
+            parameters:
+                - name: accountId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.DeleteAccountReply'
+        patch:
+            tags:
+                - AccountService
+            operationId: AccountService_UpdateAccount
+            parameters:
+                - name: accountId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/account.v1.UpdateAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.UpdateAccountReply'
+    /v1/accounts/{accountId}/credit:
+        patch:
+            tags:
+                - AccountService
+            operationId: AccountService_CreditAccount
+            parameters:
+                - name: accountId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/account.v1.CreditAccountRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/account.v1.CreditAccountReply'
+components:
+    schemas:
+        account.v1.Account:
+            type: object
+            properties:
+                accountId:
+                    type: string
+                customerId:
+                    type: string
+                accountNumber:
+                    type: string
+                accountType:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                availableBalance:
+                    type: string
+                pendingBalance:
+                    type: string
+                creditLimit:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                lastTransactionAt:
+                    type: string
+        account.v1.CreateAccountReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        account.v1.CreateAccountRequest:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                accountType:
+                    type: string
+                currency:
+                    type: string
+        account.v1.CreditAccountReply:
+            type: object
+            properties:
+                message:
+                    type: string
+                availableBalance:
+                    type: string
+        account.v1.CreditAccountRequest:
+            type: object
+            properties:
+                accountId:
+                    type: string
+                amount:
+                    type: string
+        account.v1.DeleteAccountReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        account.v1.GetAccountReply:
+            type: object
+            properties:
+                accountId:
+                    type: string
+                customerId:
+                    type: string
+                accountNumber:
+                    type: string
+                accountType:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                availableBalance:
+                    type: string
+                pendingBalance:
+                    type: string
+                creditLimit:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+                lastTransactionAt:
+                    type: string
+        account.v1.GetAccountsReply:
+            type: object
+            properties:
+                accounts:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/account.v1.Account'
+        account.v1.UpdateAccountReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        account.v1.UpdateAccountRequest:
+            type: object
+            properties:
+                accountId:
+                    type: string
+                accountType:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                creditLimit:
+                    type: string
+tags:
+    - name: AccountService

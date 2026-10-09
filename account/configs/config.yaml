@@ -1,0 +1,19 @@
+server:
+  http:
+    addr: 0.0.0.0:8007
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9007
+    timeout: 1s
+data:
+  database:
+    driver: postgres
+    source: "host=localhost user=postgres password=postgres dbname=postgres port=1234 sslmode=disable"
+    
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+
+  customer_client:
+    endpoint: 127.0.0.1:9009

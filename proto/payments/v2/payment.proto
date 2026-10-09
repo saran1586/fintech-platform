@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package api.payments.v2;
+
+option go_package = "account-service/proto/payments/v2;paymentsv2";
+
+import "google/api/annotations.proto";
+
+service PaymentService {
+
+  rpc CreatePayment(CreatePaymentRequest) returns (PaymentReply) {
+    option (google.api.http) = {
+      post: "/v1/payments"
+      body: "*"
+    };
+  }
+
+  rpc GetPayment(GetPaymentRequest) returns (PaymentReply) {
+    option (google.api.http) = {
+      get: "/v1/payments/{payment_id}"
+    };
+  }
+
+  rpc UpdatePayment(UpdatePaymentRequest) returns (PaymentReply) {
+    option (google.api.http) = {
+      put: "/v1/payments/{payment_id}"
+      body: "*"
+    };
+  }
+
+  rpc DeletePayment(DeletePaymentRequest) returns (DeletePaymentReply) {
+    option (google.api.http) = {
+      delete: "/v1/payments/{payment_id}"
+    };
+  }
+
+  rpc ListPayments(ListPaymentsRequest) returns (ListPaymentsReply) {
+    option (google.api.http) = {
+      get: "/v1/payments"
+    };
+  }
+}
+
+message CreatePaymentRequest {
+  string from_account_id = 1;
+  string to_account_id = 2;
+  string payment_type = 3;
+  double amount = 4;
+  string currency = 5;
+  string status = 6;
+  string payment_method = 7;
+  string reference_number = 8;
+  string external_reference = 9;
+  string scheduled_at = 10;
+}
+
+message UpdatePaymentRequest {
+  string payment_id = 1;
+  string from_account_id = 2;
+  string to_account_id = 3;
+  string payment_type = 4;
+  double amount = 5;
+  string currency = 6;
+  string status = 7;
+  string payment_method = 8;
+  string reference_number = 9;
+  string external_reference = 10;
+  string scheduled_at = 11;
+}
+
+message GetPaymentRequest {
+  string payment_id = 1;
+}
+
+message DeletePaymentRequest {
+  string payment_id = 1;
+}
+
+message DeletePaymentReply {
+  bool success = 1;
+}
+
+message ListPaymentsRequest {}
+
+message PaymentReply {
+  string payment_id = 1;
+  string from_account_id = 2;
+  string to_account_id = 3;
+  string payment_type = 4;
+  double amount = 5;
+  string currency = 6;
+  string status = 7;
+  string payment_method = 8;
+  string reference_number = 9;
+  string external_reference = 10;
+  string scheduled_at = 11;
+}
+
+message ListPaymentsReply {
+  repeated PaymentReply payments = 1;
+}

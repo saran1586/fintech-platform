@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package card.v1;
+
+option go_package = "card/api/card/v1;v1";
+
+import "google/api/annotations.proto";
+
+service CardService {
+
+  rpc CreateCard(CreateCardRequest) returns (CreateCardReply) {
+    option (google.api.http) = {
+      post: "/v1/cards"
+      body: "*"
+    };
+  }
+
+  rpc GetCard(GetCardRequest) returns (GetCardReply) {
+    option (google.api.http) = {
+      get: "/v1/cards/{card_id}"
+    };
+  }
+
+  rpc GetCards(GetCardsRequest) returns (GetCardsReply) {
+    option (google.api.http) = {
+      get: "/v1/cards"
+    };
+  }
+
+  rpc UpdateCard(UpdateCardRequest) returns (UpdateCardReply) {
+    option (google.api.http) = {
+      patch: "/v1/cards/{card_id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteCard(DeleteCardRequest) returns (DeleteCardReply) {
+    option (google.api.http) = {
+      delete: "/v1/cards/{card_id}"
+    };
+  }
+}
+
+message CreateCardRequest {
+  int64 account_id = 1;
+  string card_type = 2;
+}
+
+message CreateCardReply {
+  string message = 1;
+}
+
+message GetCardRequest {
+  int64 card_id = 1;
+}
+
+message GetCardReply {
+  int64 card_id = 1;
+  int64 account_id = 2;
+  string card_number_hash = 3;
+  string card_type = 4;
+  string card_status = 5;
+  string expiry_date = 6;
+  string daily_limit = 7;
+  string monthly_limit = 8;
+  int32 pin_attempts = 9;
+  string created_at = 10;
+  string last_used_at = 11;
+}
+
+message GetCardsRequest {
+}
+
+message GetCardsReply {
+  repeated GetCardReply cards = 1;
+}
+
+message UpdateCardRequest {
+  int64 card_id = 1;
+  optional string card_type = 2;
+  optional string card_status = 3;
+  optional string expiry_date = 4;
+  optional string daily_limit = 5;
+  optional string monthly_limit = 6;
+}
+
+message UpdateCardReply {
+  string message = 1;
+}
+
+message DeleteCardRequest {
+  int64 card_id = 1;
+}
+
+message DeleteCardReply {
+  string message = 1;
+}

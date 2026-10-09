@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package api.account.v2;
+
+option go_package = "account-service/proto/account/v2;accountv2";
+
+import "google/api/annotations.proto";
+
+service AccountService {
+
+  rpc CreateAccount(CreateAccountRequest) returns (AccountReply) {
+    option (google.api.http) = {
+      post: "/v1/accounts"
+      body: "*"
+    };
+  }
+
+  rpc GetAccount(GetAccountRequest) returns (AccountReply) {
+    option (google.api.http) = {
+      get: "/v1/accounts/{account_id}"
+    };
+  }
+
+  rpc UpdateAccount(UpdateAccountRequest) returns (AccountReply) {
+    option (google.api.http) = {
+      put: "/v1/accounts/{account_id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountReply) {
+    option (google.api.http) = {
+      delete: "/v1/accounts/{account_id}"
+    };
+  }
+
+  rpc ListAccounts(ListAccountsRequest) returns (ListAccountsReply) {
+    option (google.api.http) = {
+      get: "/v1/accounts"
+    };
+  }
+}
+
+message CreateAccountRequest {
+  string customer_id = 1;
+  string account_number = 2;
+  string account_type = 3;
+  string currency = 4;
+  string status = 5;
+  double available_balance = 6;
+  double pending_balance = 7;
+  double credit_limit = 8;
+}
+
+message UpdateAccountRequest {
+  string account_id = 1;
+  string customer_id = 2;
+  string account_number = 3;
+  string account_type = 4;
+  string currency = 5;
+  string status = 6;
+  double available_balance = 7;
+  double pending_balance = 8;
+  double credit_limit = 9;
+}
+
+message GetAccountRequest {
+  string account_id = 1;
+}
+
+message DeleteAccountRequest {
+  string account_id = 1;
+}
+
+message DeleteAccountReply {
+  bool success = 1;
+}
+
+message ListAccountsRequest {}
+
+message AccountReply {
+  string account_id = 1;
+  string customer_id = 2;
+  string account_number = 3;
+  string account_type = 4;
+  string currency = 5;
+  string status = 6;
+  double available_balance = 7;
+  double pending_balance = 8;
+  double credit_limit = 9;
+}
+
+message ListAccountsReply {
+  repeated AccountReply accounts = 1;
+}

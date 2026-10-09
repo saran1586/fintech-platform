@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package api.customer.v2;
+
+option go_package = "account-service/proto/customer/v2;customerv2";
+
+import "google/api/annotations.proto";
+
+service CustomerService {
+
+
+  rpc CreateCustomer(CreateCustomerRequest) returns (CreateCustomerReply) {
+  option (google.api.http) = {
+    post: "/v1/customers"
+    body: "*"
+  };
+}
+
+rpc GetCustomer(GetCustomerRequest) returns (CustomerReply) {
+  option (google.api.http) = {
+    get: "/v1/customers/{customer_id}"
+  };
+}
+
+rpc UpdateCustomer(UpdateCustomerRequest) returns (CustomerReply) {
+  option (google.api.http) = {
+    put: "/v1/customers/{customer_id}"
+    body: "*"
+  };
+}
+
+rpc DeleteCustomer(DeleteCustomerRequest) returns (DeleteCustomerReply) {
+  option (google.api.http) = {
+    delete: "/v1/customers/{customer_id}"
+  };
+}
+
+rpc ListCustomers(ListCustomersRequest) returns (ListCustomersReply) {
+  option (google.api.http) = {
+    get: "/v1/customers"
+  };
+}
+
+
+
+}
+
+message CreateCustomerRequest {
+  string customer_number = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone = 5;
+  string date_of_birth = 6;
+  string status = 7;
+  string kyc_status = 8;
+}
+
+message CreateCustomerReply {
+  string customer_id = 1;
+  string customer_number = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  string phone = 6;
+  string date_of_birth = 7;
+  string status = 8;
+  string kyc_status = 9;
+}
+
+message GetCustomerRequest {
+  string customer_id = 1;
+}
+
+message CustomerReply {
+  string customer_id = 1;
+  string customer_number = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  string phone = 6;
+  string date_of_birth = 7;
+  string status = 8;
+  string kyc_status = 9;
+}
+
+message UpdateCustomerRequest {
+  string customer_id = 1;
+  string customer_number = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string email = 5;
+  string phone = 6;
+  string date_of_birth = 7;
+  string status = 8;
+  string kyc_status = 9;
+}
+
+message DeleteCustomerRequest {
+  string customer_id = 1;
+}
+
+message DeleteCustomerReply {
+  bool success = 1;
+}
+
+message ListCustomersRequest {}
+
+message ListCustomersReply {
+  repeated CustomerReply customers = 1;
+}

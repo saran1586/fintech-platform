@@ -1,0 +1,169 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: CardService API
+    version: 0.0.1
+paths:
+    /v1/cards:
+        get:
+            tags:
+                - CardService
+            operationId: CardService_GetCards
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/card.v1.GetCardsReply'
+        post:
+            tags:
+                - CardService
+            operationId: CardService_CreateCard
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/card.v1.CreateCardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/card.v1.CreateCardReply'
+    /v1/cards/{cardId}:
+        get:
+            tags:
+                - CardService
+            operationId: CardService_GetCard
+            parameters:
+                - name: cardId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/card.v1.GetCardReply'
+        delete:
+            tags:
+                - CardService
+            operationId: CardService_DeleteCard
+            parameters:
+                - name: cardId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/card.v1.DeleteCardReply'
+        patch:
+            tags:
+                - CardService
+            operationId: CardService_UpdateCard
+            parameters:
+                - name: cardId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/card.v1.UpdateCardRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/card.v1.UpdateCardReply'
+components:
+    schemas:
+        card.v1.CreateCardReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        card.v1.CreateCardRequest:
+            type: object
+            properties:
+                accountId:
+                    type: string
+                cardType:
+                    type: string
+        card.v1.DeleteCardReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        card.v1.GetCardReply:
+            type: object
+            properties:
+                cardId:
+                    type: string
+                accountId:
+                    type: string
+                cardNumberHash:
+                    type: string
+                cardType:
+                    type: string
+                cardStatus:
+                    type: string
+                expiryDate:
+                    type: string
+                dailyLimit:
+                    type: string
+                monthlyLimit:
+                    type: string
+                pinAttempts:
+                    type: integer
+                    format: int32
+                createdAt:
+                    type: string
+                lastUsedAt:
+                    type: string
+        card.v1.GetCardsReply:
+            type: object
+            properties:
+                cards:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/card.v1.GetCardReply'
+        card.v1.UpdateCardReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        card.v1.UpdateCardRequest:
+            type: object
+            properties:
+                cardId:
+                    type: string
+                cardType:
+                    type: string
+                cardStatus:
+                    type: string
+                expiryDate:
+                    type: string
+                dailyLimit:
+                    type: string
+                monthlyLimit:
+                    type: string
+tags:
+    - name: CardService

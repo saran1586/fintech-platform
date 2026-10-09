@@ -1,0 +1,202 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: CustomerService API
+    version: 0.0.1
+paths:
+    /v1/customers:
+        get:
+            tags:
+                - CustomerService
+            operationId: CustomerService_GetCustomers
+            parameters:
+                - name: page
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer.v1.GetCustomersReply'
+        post:
+            tags:
+                - CustomerService
+            operationId: CustomerService_CreateCustomer
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer.v1.CreateCustomerRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer.v1.CreateCustomerReply'
+    /v1/customers/{customerId}:
+        get:
+            tags:
+                - CustomerService
+            operationId: CustomerService_GetCustomer
+            parameters:
+                - name: customerId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer.v1.GetCustomerReply'
+        delete:
+            tags:
+                - CustomerService
+            operationId: CustomerService_DeleteCustomer
+            parameters:
+                - name: customerId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer.v1.DeleteCustomerReply'
+        patch:
+            tags:
+                - CustomerService
+            operationId: CustomerService_UpdateCustomer
+            parameters:
+                - name: customerId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/customer.v1.UpdateCustomerRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/customer.v1.UpdateCustomerReply'
+components:
+    schemas:
+        customer.v1.CreateCustomerReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        customer.v1.CreateCustomerRequest:
+            type: object
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                dateOfBirth:
+                    type: string
+        customer.v1.Customer:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                customerNumber:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                dateOfBirth:
+                    type: string
+                status:
+                    type: string
+                kycStatus:
+                    type: string
+        customer.v1.DeleteCustomerReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        customer.v1.GetCustomerReply:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                customerNumber:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                dateOfBirth:
+                    type: string
+                status:
+                    type: string
+                kycStatus:
+                    type: string
+        customer.v1.GetCustomersReply:
+            type: object
+            properties:
+                customers:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/customer.v1.Customer'
+        customer.v1.UpdateCustomerReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        customer.v1.UpdateCustomerRequest:
+            type: object
+            properties:
+                customerId:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                email:
+                    type: string
+                phone:
+                    type: string
+                dateOfBirth:
+                    type: string
+tags:
+    - name: CustomerService

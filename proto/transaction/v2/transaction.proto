@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package api.transaction.v2;
+
+option go_package = "account-service/proto/transaction/v2;transactionv2";
+
+import "google/api/annotations.proto";
+
+service TransactionService {
+
+  rpc CreateTransaction(CreateTransactionRequest) returns (TransactionReply) {
+    option (google.api.http) = {
+      post: "/v1/transactions"
+      body: "*"
+    };
+  }
+
+  rpc GetTransaction(GetTransactionRequest) returns (TransactionReply) {
+    option (google.api.http) = {
+      get: "/v1/transactions/{transaction_id}"
+    };
+  }
+
+  rpc UpdateTransaction(UpdateTransactionRequest) returns (TransactionReply) {
+    option (google.api.http) = {
+      put: "/v1/transactions/{transaction_id}"
+      body: "*"
+    };
+  }
+
+  rpc DeleteTransaction(DeleteTransactionRequest) returns (DeleteTransactionReply) {
+    option (google.api.http) = {
+      delete: "/v1/transactions/{transaction_id}"
+    };
+  }
+
+  rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsReply) {
+    option (google.api.http) = {
+      get: "/v1/transactions"
+    };
+  }
+}
+
+message CreateTransactionRequest {
+  string account_id = 1;
+  string related_transaction_id = 2;
+  string transaction_type = 3;
+  double amount = 4;
+  string currency = 5;
+  string status = 6;
+  string description = 7;
+  string reference_number = 8;
+  string merchant_info = 9;
+  string posting_date = 10;
+  string transaction_date = 11;
+}
+
+message UpdateTransactionRequest {
+  string transaction_id = 1;
+  string account_id = 2;
+  string related_transaction_id = 3;
+  string transaction_type = 4;
+  double amount = 5;
+  string currency = 6;
+  string status = 7;
+  string description = 8;
+  string reference_number = 9;
+  string merchant_info = 10;
+  string posting_date = 11;
+  string transaction_date = 12;
+}
+
+message GetTransactionRequest {
+  string transaction_id = 1;
+}
+
+message DeleteTransactionRequest {
+  string transaction_id = 1;
+}
+
+message DeleteTransactionReply {
+  bool success = 1;
+}
+
+message ListTransactionsRequest {}
+
+message TransactionReply {
+  string transaction_id = 1;
+  string account_id = 2;
+  string related_transaction_id = 3;
+  string transaction_type = 4;
+  double amount = 5;
+  string currency = 6;
+  string status = 7;
+  string description = 8;
+  string reference_number = 9;
+  string merchant_info = 10;
+  string posting_date = 11;
+  string transaction_date = 12;
+}
+
+message ListTransactionsReply {
+  repeated TransactionReply transactions = 1;
+}

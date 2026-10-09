@@ -1,0 +1,190 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: PaymentsService API
+    version: 0.0.1
+paths:
+    /v1/payments:
+        get:
+            tags:
+                - PaymentsService
+            operationId: PaymentsService_GetPayments
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payments.v2.GetPaymentsReply'
+        post:
+            tags:
+                - PaymentsService
+            operationId: PaymentsService_CreatePayment
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payments.v2.CreatePaymentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payments.v2.CreatePaymentReply'
+    /v1/payments/{paymentId}:
+        get:
+            tags:
+                - PaymentsService
+            operationId: PaymentsService_GetPayment
+            parameters:
+                - name: paymentId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payments.v2.GetPaymentReply'
+        delete:
+            tags:
+                - PaymentsService
+            operationId: PaymentsService_DeletePayment
+            parameters:
+                - name: paymentId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payments.v2.DeletePaymentReply'
+        patch:
+            tags:
+                - PaymentsService
+            operationId: PaymentsService_UpdatePayment
+            parameters:
+                - name: paymentId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/payments.v2.UpdatePaymentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/payments.v2.UpdatePaymentReply'
+components:
+    schemas:
+        payments.v2.CreatePaymentReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        payments.v2.CreatePaymentRequest:
+            type: object
+            properties:
+                fromAccountId:
+                    type: string
+                toAccountId:
+                    type: string
+                paymentType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                paymentMethod:
+                    type: string
+                referenceNumber:
+                    type: string
+                externalReference:
+                    type: string
+                scheduledAt:
+                    type: string
+        payments.v2.DeletePaymentReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        payments.v2.GetPaymentReply:
+            type: object
+            properties:
+                paymentId:
+                    type: string
+                fromAccountId:
+                    type: string
+                toAccountId:
+                    type: string
+                paymentType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                paymentMethod:
+                    type: string
+                referenceNumber:
+                    type: string
+                externalReference:
+                    type: string
+                scheduledAt:
+                    type: string
+                processedAt:
+                    type: string
+                createdAt:
+                    type: string
+        payments.v2.GetPaymentsReply:
+            type: object
+            properties:
+                payments:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/payments.v2.GetPaymentReply'
+        payments.v2.UpdatePaymentReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        payments.v2.UpdatePaymentRequest:
+            type: object
+            properties:
+                paymentId:
+                    type: string
+                paymentType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                paymentMethod:
+                    type: string
+                externalReference:
+                    type: string
+                scheduledAt:
+                    type: string
+tags:
+    - name: PaymentsService

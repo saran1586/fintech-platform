@@ -1,0 +1,200 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: TransactionService API
+    version: 0.0.1
+paths:
+    /v1/transactions:
+        get:
+            tags:
+                - TransactionService
+            operationId: TransactionService_GetTransactions
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction.v1.GetTransactionsReply'
+        post:
+            tags:
+                - TransactionService
+            operationId: TransactionService_CreateTransaction
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/transaction.v1.CreateTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction.v1.CreateTransactionReply'
+    /v1/transactions/{transactionId}:
+        get:
+            tags:
+                - TransactionService
+            operationId: TransactionService_GetTransaction
+            parameters:
+                - name: transactionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction.v1.GetTransactionReply'
+        delete:
+            tags:
+                - TransactionService
+            operationId: TransactionService_DeleteTransaction
+            parameters:
+                - name: transactionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction.v1.DeleteTransactionReply'
+        patch:
+            tags:
+                - TransactionService
+            operationId: TransactionService_UpdateTransaction
+            parameters:
+                - name: transactionId
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/transaction.v1.UpdateTransactionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/transaction.v1.UpdateTransactionReply'
+components:
+    schemas:
+        transaction.v1.CreateTransactionReply:
+            type: object
+            properties:
+                message:
+                    type: string
+                transactionId:
+                    type: string
+        transaction.v1.CreateTransactionRequest:
+            type: object
+            properties:
+                paymentId:
+                    type: string
+                accountId:
+                    type: string
+                relatedTransactionId:
+                    type: string
+                transactionType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                description:
+                    type: string
+                referenceNumber:
+                    type: string
+                merchantInfo:
+                    type: string
+                postingDate:
+                    type: string
+        transaction.v1.DeleteTransactionReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        transaction.v1.GetTransactionReply:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                paymentId:
+                    type: string
+                accountId:
+                    type: string
+                relatedTransactionId:
+                    type: string
+                transactionType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                description:
+                    type: string
+                referenceNumber:
+                    type: string
+                merchantInfo:
+                    type: string
+                postingDate:
+                    type: string
+                transactionDate:
+                    type: string
+                createdAt:
+                    type: string
+                postedAt:
+                    type: string
+                archivedAt:
+                    type: string
+        transaction.v1.GetTransactionsReply:
+            type: object
+            properties:
+                transactions:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/transaction.v1.GetTransactionReply'
+        transaction.v1.UpdateTransactionReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        transaction.v1.UpdateTransactionRequest:
+            type: object
+            properties:
+                transactionId:
+                    type: string
+                transactionType:
+                    type: string
+                amount:
+                    type: string
+                currency:
+                    type: string
+                status:
+                    type: string
+                description:
+                    type: string
+                merchantInfo:
+                    type: string
+                postingDate:
+                    type: string
+tags:
+    - name: TransactionService
